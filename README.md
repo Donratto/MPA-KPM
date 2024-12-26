@@ -76,7 +76,7 @@ git merge
 ```
 git pull
 ```
-#### updates remote
+#### updates remote 
 ```
 git add <file>|*
 git commit -m "<message>"
