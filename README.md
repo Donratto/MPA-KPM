@@ -47,7 +47,7 @@ Study the available applications in NS-3. Choose suitable applications to simula
 - Number of UEs per gNnodeB: 5
 - Numerology number BWP1: 4
 - Numerology number for BWP2: 2
-- gNodeB TX power: 4 (jednotka??)
+- gNodeB TX power: 4 dBm
 - Bandwith: 1 GHz
 - Frequency band 1: 28 Ghz - pravděpodobně přepsat
 - Frequency band 2:  28.2 Ghz - taky přepsat
