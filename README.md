@@ -65,9 +65,9 @@ Dedicated band for using milimeter waves in Czechia is not available yet, theref
 For setting an appropriate numerology value, determining the conditions and used frequency is necessary. In our usecase (using milimeter waves), higher subcarrier spacing is optimal. 
 
 
-# 5G Numerology Table
 
-| Numerology (\`n\`) | Subcarrier Spacing (\`Δf\`) | Typical Use Cases                          | Suitable Frequency Range |
+
+| Numerology (\n\) | Subcarrier Spacing (\Δf\) | Typical Use Cases                          | Suitable Frequency Range |
 |---------------------|----------------------------|-------------------------------------------|--------------------------|
 | 0                   | 15 kHz                    | Voice, broadband, IoT (e.g., LTE-like)    | < 6 GHz                  |
 | 1                   | 30 kHz                    | eMBB, IoT                                 | < 6 GHz                  |
