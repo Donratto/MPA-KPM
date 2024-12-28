@@ -103,6 +103,7 @@ There are no specific rules for setting the bandwidth value. However, what is kn
 
 The GridScenarioHelper class in the script is used to create and configure a grid-based deployment of network nodes (gNBs and UEs) in a simulation scenario. It simplifies the process of arranging nodes in a structured, grid-like layout and managing their spatial properties.
 
+The following table shows the position of devices used in our scenario:
 
 | **Device** | **X Position (m)** | **Y Position (m)** | **Z Position (m)** |
 |------------|---------------------|---------------------|---------------------|
