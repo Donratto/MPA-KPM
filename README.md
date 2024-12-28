@@ -81,10 +81,14 @@ In this very usecase, we have decided to choose numerology number 3 and number 4
 
 
 
+
+
+
+
 ### Bandwith
-- Numerology number BWP1: 4
-- Numerology number for BWP2: 2
-- gNodeB TX power: 4 dBm
+
+There are no specific rules for setting the bandwith value. However, what is known are the maximum bandwith values for each numerology type. For both numerologies 3 and 4, bandwith up to 400 MHz is available. The most commonly used bandwith is 100 MHz. Therefore your team has decided to use this value as the default one for our project. 
+
 - Bandwith: 1 GHz
 
 
