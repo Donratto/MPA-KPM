@@ -38,19 +38,34 @@ Study the available applications in NS-3. Choose suitable applications to simula
 - Create radio environment maps using the `NrRadioEnvironmentMapHelper` in LENA-5G to visualize network coverage, signal quality, and interference.
 
 
-
 # Analysis and Report
 
 ## Simulation & Network Parameters
 
+### Given Parameters from the assigment:
+
 - Number of gNodeBs: 2
 - Number of UEs per gNnodeB: 5
+
+### Frequency selection:
+
+Since using milimeter waves is required, our team decided to use the following frequencies:
+
+- Frequency band 1: 26.5 Ghz 
+- Frequency band 2:  27 Ghz
+
+Dedicated band for using milimeter waves in Czechia is not available yet, therefore, our team used as a source of the information the following table:
+
+[ctu_tabulka](https://spektrum.ctu.gov.cz/kmitocty?filter%5BfrequencyFrom%5D=1&filter%5BfrequencyFromUnit%5D=GHz&filter%5BfrequencyTo%5D=102&filter%5BfrequencyToUnit%5D=GHz&filter%5BapplicationIds%5D%5B0%5D=47&filter%5BapplicationIds%5D%5B1%5D=182)
+
+
+
+### Numerology
+
 - Numerology number BWP1: 4
 - Numerology number for BWP2: 2
 - gNodeB TX power: 4 dBm
 - Bandwith: 1 GHz
-- Frequency band 1: 28 Ghz - pravděpodobně přepsat
-- Frequency band 2:  28.2 Ghz - taky přepsat
 
 
 
