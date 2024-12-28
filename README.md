@@ -99,6 +99,21 @@ There are no specific rules for setting the bandwidth value. However, what is kn
 | Base Stations (gNB)| Not assigned         | Operate at Layer 2 - no IPs assigned  |
 
 
+### GridScenarioHelper
+
+The GridScenarioHelper class in the script is used to create and configure a grid-based deployment of network nodes (gNBs and UEs) in a simulation scenario. It simplifies the process of arranging nodes in a structured, grid-like layout and managing their spatial properties.
+
+
+| **Device** | **X Position (m)** | **Y Position (m)** | **Z Position (m)** |
+|------------|---------------------|---------------------|---------------------|
+| gNB 0      | 0.0                 | 0.0                 | 1.5                 |
+| gNB 1      | 5.0                 | 0.0                 | 1.5                 |
+| UE 0       | 0.5                 | 0.5                 | 1.5                 |
+| UE 1       | 1.5                 | 1.5                 | 1.5                 |
+| UE 2       | 2.5                 | 2.5                 | 1.5                 |
+| UE 3       | 3.5                 | 3.5                 | 1.5                 |
+| UE 4       | 4.5                 | 4.5                 | 1.5                 |
+
 
 
 
