@@ -45,6 +45,7 @@ $ ./ns3 run "cttc-nr-demo --PrintHelp"
 #include "ns3/network-module.h"
 #include "ns3/nr-module.h"
 #include "ns3/point-to-point-module.h"
+#include "ns3/nr-radio-environment-map-helper.h"
 
 /*
  * Use, always, the namespace ns3. All the NR classes are inside such namespace.
@@ -60,6 +61,8 @@ NS_LOG_COMPONENT_DEFINE("CttcNrDemo");
 int
 main(int argc, char* argv[])
 {
+    std::string remMode = "CoverageArea";
+    std::string typeOfRem = "DlRem";
     /*
      * Variables that represent the parameters we will accept as input by the
      * command line. Each of them is initialized with a default value, and
@@ -85,10 +88,10 @@ main(int argc, char* argv[])
     // NR parameters. We will take the input from the command line, and then we
     // will pass them inside the NR module.
     uint16_t numerologyBwp1 = 4;
-    double centralFrequencyBand1 = 28e9;
+    double centralFrequencyBand1 = 26.5e9;
     double bandwidthBand1 = 100e6;
     uint16_t numerologyBwp2 = 2;
-    double centralFrequencyBand2 = 28.2e9;
+    double centralFrequencyBand2 = 27e9;
     double bandwidthBand2 = 100e6;
     double totalTxPower = 4;
 
@@ -484,7 +487,6 @@ main(int argc, char* argv[])
     dlClientLowLat.SetAttribute("PacketSize", UintegerValue(udpPacketSizeULL));
     dlClientLowLat.SetAttribute("Interval", TimeValue(Seconds(1.0 / lambdaULL)));
     */
-    
    
 
 
@@ -534,12 +536,6 @@ main(int argc, char* argv[])
     
 
 
-
-
-
-
-
-
     /*
     */
     // start TCP server and client apps
@@ -559,11 +555,98 @@ main(int argc, char* argv[])
     NodeContainer endpointNodes;
     endpointNodes.Add(remoteHost);
     endpointNodes.Add(gridScenario.GetUserTerminals());
+    endpointNodes.Add(gridScenario.GetBaseStations());
 
     Ptr<ns3::FlowMonitor> monitor = flowmonHelper.Install(endpointNodes);
     monitor->SetAttribute("DelayBinWidth", DoubleValue(0.001));
     monitor->SetAttribute("JitterBinWidth", DoubleValue(0.001));
     monitor->SetAttribute("PacketSizeBinWidth", DoubleValue(20));
+
+
+
+
+
+// Rem parameters
+    double xMin = -40.0;
+    double xMax = 80.0;
+    uint16_t xRes = 50;
+    double yMin = -70.0;
+    double yMax = 50.0;
+    uint16_t yRes = 50;
+    double z = 1.5;
+
+
+     uint16_t remBwpId = 0;
+    // Radio Environment Map Generation for ccId 0
+    Ptr<NrRadioEnvironmentMapHelper> remHelper = CreateObject<NrRadioEnvironmentMapHelper>();
+    remHelper->SetMinX(xMin);
+    remHelper->SetMaxX(xMax);
+    remHelper->SetResX(xRes);
+    remHelper->SetMinY(yMin);
+    remHelper->SetMaxY(yMax);
+    remHelper->SetResY(yRes);
+    remHelper->SetZ(z);
+    remHelper->SetSimTag(simTag);
+ 
+    enbNetDev.Get(0)
+        ->GetObject<NrGnbNetDevice>()
+        ->GetPhy(remBwpId)
+        ->GetSpectrumPhy()
+        ->GetBeamManager()
+        ->ChangeBeamformingVector(ueLowLatNetDev.Get(0));
+ 
+
+        enbNetDev.Get(1)  //ueLowLatNetDev, enbNetDev
+            ->GetObject<NrGnbNetDevice>()
+            ->GetPhy(remBwpId)
+            ->GetSpectrumPhy()
+            ->GetBeamManager()
+            ->ChangeBeamformingVector(ueLowLatNetDev.Get(1));
+    
+
+ 
+    if (remMode == "BeamShape")
+    {
+        remHelper->SetRemMode(NrRadioEnvironmentMapHelper::BEAM_SHAPE);
+ 
+        if (typeOfRem == "DlRem")
+        {
+            remHelper->CreateRem(enbNetDev, ueLowLatNetDev.Get(0), remBwpId);
+        }
+        else if (typeOfRem == "UlRem")
+        {
+            remHelper->CreateRem(ueLowLatNetDev, enbNetDev.Get(0), remBwpId);
+        }
+        else
+        {
+            NS_ABORT_MSG("typeOfRem not supported. "
+                         "Choose among 'DlRem', 'UlRem'.");
+        }
+    }
+    else if (remMode == "CoverageArea")
+    {
+        remHelper->SetRemMode(NrRadioEnvironmentMapHelper::COVERAGE_AREA);
+        remHelper->CreateRem(enbNetDev, ueLowLatNetDev.Get(0), remBwpId);
+    }
+    else if (remMode == "UeCoverage")
+    {
+        remHelper->SetRemMode(NrRadioEnvironmentMapHelper::UE_COVERAGE);
+        remHelper->CreateRem(ueLowLatNetDev, enbNetDev.Get(0), remBwpId);
+    }
+    else
+    {
+        NS_ABORT_MSG("Not supported remMode.");
+    }
+    
+      // here's a minimal gnuplot script that will plot the above:
+     // 
+     // set view map;
+     // set term x11;
+     // set xlabel "X"
+     // set ylabel "Y"
+     // set cblabel "SINR (dB)"
+     // plot "rem.out" using ($1):($2):(10*log10($4)) with image
+
 
     Simulator::Stop(simTime);
     Simulator::Run();
