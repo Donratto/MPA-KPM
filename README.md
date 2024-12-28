@@ -89,6 +89,17 @@ In our case the distance of the UE from gNodeB is about 20 meters. This distance
 There are no specific rules for setting the bandwidth value. However, what is known are the maximum bandwidth values for each numerology type. For both numerologies 3 and 4, bandwidth up to 400 MHz is available. The most commonly used bandwidth is 100 MHz. Therefore your team has decided to use this value as the default one for our project. 
 
 
+### IP Addressing
+
+| **Device**        | **IP Address Range** | **Assigned IPs**                     |
+|--------------------|-----------------------|---------------------------------------|
+| Remote Host        | `1.0.0.0/8`          | First available address in this range|
+| Packet Gateway (PGW)| `1.0.0.0/8`         | Address assigned via `Ipv4AddressHelper`|
+| User Equipment (UE)| `7.0.0.0/8`          | - UE 0: `7.0.0.1` <br> - UE 1: `7.0.0.2` <br> - ... <br> - UE \(N-1\): `7.0.0.N` |
+| Base Stations (gNB)| Not assigned         | Operate at Layer 2 - no IPs assigned  |
+
+
+
 
 
 
