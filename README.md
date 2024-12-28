@@ -56,7 +56,7 @@ Since using milimeter waves is required, our team decided to use the following f
 
 Dedicated band for using milimeter waves in Czechia is not available yet, therefore, our team used as a source of the information the following table:
 
-[ctu_tabulka](https://spektrum.ctu.gov.cz/kmitocty?filter%5BfrequencyFrom%5D=1&filter%5BfrequencyFromUnit%5D=GHz&filter%5BfrequencyTo%5D=102&filter%5BfrequencyToUnit%5D=GHz&filter%5BapplicationIds%5D%5B0%5D=47&filter%5BapplicationIds%5D%5B1%5D=182)
+[ctu_table](https://spektrum.ctu.gov.cz/kmitocty?filter%5BfrequencyFrom%5D=1&filter%5BfrequencyFromUnit%5D=GHz&filter%5BfrequencyTo%5D=102&filter%5BfrequencyToUnit%5D=GHz&filter%5BapplicationIds%5D%5B0%5D=47&filter%5BapplicationIds%5D%5B1%5D=182)
 
 
 
