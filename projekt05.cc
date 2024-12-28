@@ -484,6 +484,7 @@ main(int argc, char* argv[])
     dlClientLowLat.SetAttribute("PacketSize", UintegerValue(udpPacketSizeULL));
     dlClientLowLat.SetAttribute("Interval", TimeValue(Seconds(1.0 / lambdaULL)));
     */
+    
    
 
 
@@ -524,16 +525,13 @@ main(int argc, char* argv[])
 
 
     // File exchange ue 4/5
-    BulkSendHelper fileExchangeSender("ns3::TcpSocketFactory", InetSocketAddress(ueLowLatIpIface.GetAddress(4), port));
+    BulkSendHelper fileExchangeSender("ns3::TcpSocketFactory", InetSocketAddress(ueLowLatIpIface.GetAddress(ueLowLatContainer.GetN()-1), port));
     fileExchangeSender.SetAttribute("MaxBytes", UintegerValue(0)); // Unlimited
-    ApplicationContainer exchangeApps = fileExchangeSender.Install(ueLowLatContainer.Get(3));
-    exchangeApps.Start((AppStartTime));
-    exchangeApps.Stop(simTime);
+    ApplicationContainer exchangeApps = fileExchangeSender.Install(ueLowLatContainer.Get(ueLowLatContainer.GetN()-2));
 
     PacketSinkHelper fileExchangeSink("ns3::TcpSocketFactory", InetSocketAddress(Ipv4Address::GetAny(), port));
-    ApplicationContainer exchangeSinkApps = fileExchangeSink.Install(ueLowLatContainer.Get(4));
-    exchangeSinkApps.Start(AppStartTime);
-    exchangeSinkApps.Stop(simTime);
+    ApplicationContainer exchangeSinkApps = fileExchangeSink.Install(ueLowLatContainer.Get(ueLowLatContainer.GetN()-1));
+    
 
 
 
@@ -547,8 +545,12 @@ main(int argc, char* argv[])
     // start TCP server and client apps
     serverApps.Start(AppStartTime);
     clientApps.Start(AppStartTime);
+    exchangeApps.Start((AppStartTime));
+    exchangeSinkApps.Start(AppStartTime);
     serverApps.Stop(simTime);
     clientApps.Stop(simTime);
+    exchangeApps.Stop(simTime);
+    exchangeSinkApps.Stop(simTime);
 
     // enable the traces provided by the nr module
     // nrHelper->EnableTraces();
@@ -581,6 +583,7 @@ main(int argc, char* argv[])
 
     double averageFlowThroughput = 0.0;
     double averageFlowDelay = 0.0;
+    double averageFlowPacketLoss = 0.0;
 
     std::ofstream outFile;
     std::string filename = outputDir + "/" + simTag;
@@ -622,6 +625,8 @@ main(int argc, char* argv[])
             // Measure the duration of the flow from receiver's perspective
             averageFlowThroughput += i->second.rxBytes * 8.0 / flowDuration / 1000 / 1000;
             averageFlowDelay += 1000 * i->second.delaySum.GetSeconds() / i->second.rxPackets;
+            averageFlowPacketLoss += (((i->second.txPackets - i->second.rxPackets) * 1.0) 
+                                            / i->second.txPackets) * 100;
 
             outFile << "  Throughput: " << i->second.rxBytes * 8.0 / flowDuration / 1000 / 1000
                     << " Mbps\n";
@@ -631,21 +636,28 @@ main(int argc, char* argv[])
             // Mbps \n";
             outFile << "  Mean jitter:  "
                     << 1000 * i->second.jitterSum.GetSeconds() / i->second.rxPackets << " ms\n";
+            outFile << "  Lost Packets: " << i->second.txPackets - i->second.rxPackets << std::endl;
+            outFile << "  Packet loss: " << (((i->second.txPackets - i->second.rxPackets) * 1.0) 
+                                            / i->second.txPackets) * 100 << "%" << std::endl;
         }
         else
         {
             outFile << "  Throughput:  0 Mbps\n";
             outFile << "  Mean delay:  0 ms\n";
             outFile << "  Mean jitter: 0 ms\n";
+            outFile << "  Lost Packets: 0";
+            outFile << "  Packet loss: 0";
         }
         outFile << "  Rx Packets: " << i->second.rxPackets << "\n";
     }
 
     double meanFlowThroughput = averageFlowThroughput / stats.size();
     double meanFlowDelay = averageFlowDelay / stats.size();
+    double meanFlowPacketLoss = averageFlowPacketLoss / stats.size();
 
     outFile << "\n\n  Mean flow throughput: " << meanFlowThroughput << "\n";
     outFile << "  Mean flow delay: " << meanFlowDelay << "\n";
+    outFile << "  Mean flow packet loss: " << meanFlowPacketLoss << "%\n";
 
     outFile.close();
 
