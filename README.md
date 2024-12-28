@@ -64,19 +64,24 @@ Dedicated band for using milimeter waves in Czechia is not available yet, theref
 
 For setting an appropriate numerology value, determining the conditions and used frequency is necessary. In our usecase (using milimeter waves), higher subcarrier spacing is optimal. 
 
+There are five numerology types:
 
-
-
-| Numerology (\n\) | Subcarrier Spacing (\Δf\) | Typical Use Cases                          | Suitable Frequency Range |
+| Numerology (n) | Subcarrier Spacing (Δf) | Typical Use Cases                          | Suitable Frequency Range |
 |---------------------|----------------------------|-------------------------------------------|--------------------------|
-| 0                   | 15 kHz                    | Voice, broadband, IoT (e.g., LTE-like)    | < 6 GHz                  |
+| 0                   | 15 kHz                    | Voice, broadband, IoT                     | < 6 GHz                  |
 | 1                   | 30 kHz                    | eMBB, IoT                                 | < 6 GHz                  |
 | 2                   | 60 kHz                    | URLLC, high-data-rate eMBB                | < 6 GHz, mmWave          |
 | 3                   | 120 kHz                   | High-speed, mmWave (short latency)        | mmWave                   |
 | 4                   | 240 kHz                   | Future ultra-low-latency applications     | mmWave                   |
 
+In this very usecase, we have decided to choose numerology number 3 and number 4. Those numerologies are suitable for milimeter waves technologies and provide more robust solution against Doppler effect in dense urban areas.
+
+### TX Power
 
 
+
+
+### Bandwith
 - Numerology number BWP1: 4
 - Numerology number for BWP2: 2
 - gNodeB TX power: 4 dBm
