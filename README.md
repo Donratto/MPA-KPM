@@ -46,7 +46,10 @@ Study the available applications in NS-3. Choose suitable applications to simula
 
 - Number of gNodeBs: 2
 - Number of UEs per gNnodeB: 5
+- Number of servers: 1
+- Addressing table:
 
+- 
 ### Frequency selection:
 
 Since using milimeter waves is required, our team decided to use the following frequencies:
@@ -78,22 +81,12 @@ In this very usecase, we have decided to choose numerology number 3 and number 4
 
 ### TX Power
 
-In our case, where the distance of the UE from gNodeB is about 20 meters, it is a small cell. In small cells, TX power is used in the range of 23.1 dBm - 30 dBm. A more precise TX power value depends on the physical environmental conditions and the determination of the specific value is done by determining the loss rate.
+In our case the distance of the UE from gNodeB is about 20 meters. This distance is considered as a small cell. In small cells, TX power is used in the range of 23.1 dBm - 30 dBm. A more precise TX power value depends on the physical environmental conditions and the determination of the specific value is done by determining the loss rate.
 
 
+### Bandwidth
 
-
-
-
-### Bandwith
-
-There are no specific rules for setting the bandwith value. However, what is known are the maximum bandwith values for each numerology type. For both numerologies 3 and 4, bandwith up to 400 MHz is available. The most commonly used bandwith is 100 MHz. Therefore your team has decided to use this value as the default one for our project. 
-
-- Bandwith: 1 GHz
-
-
-
-
+There are no specific rules for setting the bandwidth value. However, what is known are the maximum bandwidth values for each numerology type. For both numerologies 3 and 4, bandwidth up to 400 MHz is available. The most commonly used bandwidth is 100 MHz. Therefore your team has decided to use this value as the default one for our project. 
 
 
 
@@ -103,8 +96,6 @@ There are no specific rules for setting the bandwith value. However, what is kno
 # NS3
 
 [ns3 examples](https://cttc-lena.gitlab.io/nr/html/group__examples.html)
-
-
 
 
 # Git
