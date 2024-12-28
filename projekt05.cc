@@ -50,7 +50,7 @@ $ ./ns3 run "cttc-nr-demo --PrintHelp"
 /*
  * Use, always, the namespace ns3. All the NR classes are inside such namespace.
  */
-using namespace ns3;
+using namespace ns3; 
 
 /*
  * With this line, we will be able to see the logs of the file by enabling the
@@ -61,7 +61,7 @@ NS_LOG_COMPONENT_DEFINE("CttcNrDemo");
 int
 main(int argc, char* argv[])
 {
-    std::string remMode = "CoverageArea";
+    std::string remMode = "None";
     std::string typeOfRem = "DlRem";
     /*
      * Variables that represent the parameters we will accept as input by the
@@ -144,6 +144,19 @@ main(int argc, char* argv[])
                  "tag to be appended to output filenames to distinguish simulation campaigns",
                  simTag);
     cmd.AddValue("outputDir", "directory where to store simulation results", outputDir);
+    cmd.AddValue("remMode",
+                 "What type of REM map to use: BeamShape, CoverageArea, UeCoverage or None.\n"
+                 "BeamShape shows beams that are configured in a user's script. "
+                 "Coverage area is used to show worst-case SINR and best-case SNR maps "
+                 "considering that at each point of the map the best beam is used "
+                 "towards that point from the serving gNB and also of all the interfering"
+                 "gNBs in the case of worst-case SINR."
+                 "UeCoverage is similar to the previous, just that it is showing the "
+                 "uplink coverage.",
+                 remMode);
+    cmd.AddValue("typeOfRem",
+                 "The type of Rem to generate (DL or UL) in the case of BeamShape option. Choose among "
+                 "'DlRem', 'UlRem'.",typeOfRem);
 
     // Parse the command line
     cmd.Parse(argc, argv);
@@ -155,22 +168,13 @@ main(int argc, char* argv[])
     NS_ABORT_IF(centralFrequencyBand1 < 0.5e9 && centralFrequencyBand1 > 100e9);
     NS_ABORT_IF(centralFrequencyBand2 < 0.5e9 && centralFrequencyBand2 > 100e9);
 
-    /*
-     * If the logging variable is set to true, enable the log of some components
-     * through the code. The same effect can be obtained through the use
-     * of the NS_LOG environment variable:
-     *
-     * export NS_LOG="UdpClient=level_info|prefix_time|prefix_func|prefix_node:UdpServer=..."
-     *
-     * Usually, the environment variable way is preferred, as it is more customizable,
-     * and more expressive.
-     */
     if (logging)
     {
         LogComponentEnable("UdpClient", LOG_LEVEL_INFO);
         LogComponentEnable("UdpServer", LOG_LEVEL_INFO);
         LogComponentEnable("LtePdcp", LOG_LEVEL_INFO);
     }
+    
 
     /*
      * Default values for the simulation. We are progressively removing all
@@ -185,9 +189,9 @@ main(int argc, char* argv[])
      */
     int64_t randomStream = 1;
     GridScenarioHelper gridScenario;
-    gridScenario.SetRows(1);
+    gridScenario.SetRows(2);
     gridScenario.SetColumns(gNbNum);
-    gridScenario.SetHorizontalBsDistance(5.0);
+    gridScenario.SetHorizontalBsDistance(10.0);
     gridScenario.SetVerticalBsDistance(5.0);
     gridScenario.SetBsHeight(1.5);
     gridScenario.SetUtHeight(1.5);
@@ -201,15 +205,14 @@ main(int argc, char* argv[])
     gridScenario.CreateScenario();
 
     /*
-     * Create two different NodeContainer for the different traffic type.
-     * In ueLowLat we will put the UEs that will receive low-latency traffic
+     * Create one NodeContainer for UEs.
      */
-    NodeContainer ueLowLatContainer;
+    NodeContainer ueContainer;
 
     for (uint32_t j = 0; j < gridScenario.GetUserTerminals().GetN(); ++j)
     {
         Ptr<Node> ue = gridScenario.GetUserTerminals().Get(j);
-        ueLowLatContainer.Add(ue);
+        ueContainer.Add(ue);
     }
 
     /*
@@ -347,21 +350,21 @@ main(int argc, char* argv[])
                                      PointerValue(CreateObject<IsotropicAntennaModel>()));
 
     uint32_t bwpIdForLowLat = 0;
-    uint32_t bwpIdForVoice = 0;
+    //uint32_t bwpIdForVoice = 0;
     if (doubleOperationalBand)
     {
-        bwpIdForVoice = 1;
+        //bwpIdForVoice = 1;
         bwpIdForLowLat = 0;
     }
 
     // gNb routing between Bearer and bandwidh part
     nrHelper->SetGnbBwpManagerAlgorithmAttribute("NGBR_LOW_LAT_EMBB",
                                                  UintegerValue(bwpIdForLowLat));
-    nrHelper->SetGnbBwpManagerAlgorithmAttribute("GBR_CONV_VOICE", UintegerValue(bwpIdForVoice));
+   //nrHelper->SetGnbBwpManagerAlgorithmAttribute("GBR_CONV_VOICE", UintegerValue(bwpIdForVoice));
 
     // Ue routing between Bearer and bandwidth part
     nrHelper->SetUeBwpManagerAlgorithmAttribute("NGBR_LOW_LAT_EMBB", UintegerValue(bwpIdForLowLat));
-    nrHelper->SetUeBwpManagerAlgorithmAttribute("GBR_CONV_VOICE", UintegerValue(bwpIdForVoice));
+   // nrHelper->SetUeBwpManagerAlgorithmAttribute("GBR_CONV_VOICE", UintegerValue(bwpIdForVoice));
 
     /*
      * We miss many other parameters. By default, not configuring them is equivalent
@@ -380,42 +383,42 @@ main(int argc, char* argv[])
      * to the NetDevices, which contains all the NR stack:
      */
 
-    NetDeviceContainer enbNetDev =
+    NetDeviceContainer gnbNetDev =
         nrHelper->InstallGnbDevice(gridScenario.GetBaseStations(), allBwps);
-    NetDeviceContainer ueLowLatNetDev = nrHelper->InstallUeDevice(ueLowLatContainer, allBwps);
+    NetDeviceContainer ueNetDev = nrHelper->InstallUeDevice(ueContainer, allBwps);
 
-    randomStream += nrHelper->AssignStreams(enbNetDev, randomStream);
-    randomStream += nrHelper->AssignStreams(ueLowLatNetDev, randomStream);
+    randomStream += nrHelper->AssignStreams(gnbNetDev, randomStream);
+    randomStream += nrHelper->AssignStreams(ueNetDev, randomStream);
     /*
      * Case (iii): Go node for node and change the attributes we have to setup
      * per-node.
      */
 
-    // Get the first netdevice (enbNetDev.Get (0)) and the first bandwidth part (0)
+    // Get the first netdevice (gnbNetDev.Get (0)) and the first bandwidth part (0)
     // and set the attribute.
-    nrHelper->GetGnbPhy(enbNetDev.Get(0), 0)
+    nrHelper->GetGnbPhy(gnbNetDev.Get(0), 0)
         ->SetAttribute("Numerology", UintegerValue(numerologyBwp1));
-    nrHelper->GetGnbPhy(enbNetDev.Get(0), 0)
+    nrHelper->GetGnbPhy(gnbNetDev.Get(0), 0)
         ->SetAttribute("TxPower", DoubleValue(10 * log10((bandwidthBand1 / totalBandwidth) * x)));
 
     if (doubleOperationalBand)
     {
-        // Get the first netdevice (enbNetDev.Get (0)) and the second bandwidth part (1)
+        // Get the first netdevice (gnbNetDev.Get (0)) and the second bandwidth part (1)
         // and set the attribute.
-        nrHelper->GetGnbPhy(enbNetDev.Get(0), 1)
+        nrHelper->GetGnbPhy(gnbNetDev.Get(0), 1)
             ->SetAttribute("Numerology", UintegerValue(numerologyBwp2));
-        nrHelper->GetGnbPhy(enbNetDev.Get(0), 1)
+        nrHelper->GetGnbPhy(gnbNetDev.Get(0), 1)
             ->SetTxPower(10 * log10((bandwidthBand2 / totalBandwidth) * x));
     }
 
     // When all the configuration is done, explicitly call UpdateConfig ()
 
-    for (auto it = enbNetDev.Begin(); it != enbNetDev.End(); ++it)
+    for (auto it = gnbNetDev.Begin(); it != gnbNetDev.End(); ++it)
     {
         DynamicCast<NrGnbNetDevice>(*it)->UpdateConfig();
     }
 
-    for (auto it = ueLowLatNetDev.Begin(); it != ueLowLatNetDev.End(); ++it)
+    for (auto it = ueNetDev.Begin(); it != ueNetDev.End(); ++it)
     {
         DynamicCast<NrUeNetDevice>(*it)->UpdateConfig();
     }
@@ -448,8 +451,8 @@ main(int argc, char* argv[])
     remoteHostStaticRouting->AddNetworkRouteTo(Ipv4Address("7.0.0.0"), Ipv4Mask("255.0.0.0"), 1);
     internet.Install(gridScenario.GetUserTerminals());
 
-    Ipv4InterfaceContainer ueLowLatIpIface =
-        epcHelper->AssignUeIpv4Address(NetDeviceContainer(ueLowLatNetDev));
+    Ipv4InterfaceContainer ueIpIface =
+        epcHelper->AssignUeIpv4Address(NetDeviceContainer(ueNetDev));
 
     // Set the default gateway for the UEs
     for (uint32_t j = 0; j < gridScenario.GetUserTerminals().GetN(); ++j)
@@ -460,35 +463,26 @@ main(int argc, char* argv[])
     }
 
     // attach UEs to the closest eNB
-    nrHelper->AttachToClosestEnb(ueLowLatNetDev, enbNetDev);
-
+    nrHelper->AttachToClosestEnb(ueNetDev, gnbNetDev);
+    /*
+    nrHelper->AttachToEnb(ueNetDev.Get(0),gnbNetDev.Get(0));
+    nrHelper->AttachToEnb(ueNetDev.Get(1),gnbNetDev.Get(0));
+    nrHelper->AttachToEnb(ueNetDev.Get(2),gnbNetDev.Get(0));
+    nrHelper->AttachToEnb(ueNetDev.Get(3),gnbNetDev.Get(1));
+    nrHelper->AttachToEnb(ueNetDev.Get(4),gnbNetDev.Get(1));
+    */
+    
     /*
      * Traffic part. Install low-latency  traffic.
      */
-    uint16_t dlPortLowLat = 1234;
-    uint16_t port = 1235;
+    uint16_t dlPort = 1234;
+    uint16_t exchangePort = 1235;
 
     ApplicationContainer serverApps;
 
     PacketSinkHelper tcpSinkHelper("ns3::TcpSocketFactory",
-                               InetSocketAddress(Ipv4Address::GetAny(), dlPortLowLat));
-    serverApps.Add(tcpSinkHelper.Install(ueLowLatContainer));
-
-    /*
-     * Configure attributes for the different generators, using user-provided
-     * parameters for generating a CBR traffic
-     *
-     * Low-Latency configuration and object creation:
-     */
-    /*
-    UdpClientHelper dlClientLowLat;
-    dlClientLowLat.SetAttribute("RemotePort", UintegerValue(dlPortLowLat));
-    dlClientLowLat.SetAttribute("MaxPackets", UintegerValue(0xFFFFFFFF));
-    dlClientLowLat.SetAttribute("PacketSize", UintegerValue(udpPacketSizeULL));
-    dlClientLowLat.SetAttribute("Interval", TimeValue(Seconds(1.0 / lambdaULL)));
-    */
-   
-
+                               InetSocketAddress(Ipv4Address::GetAny(), dlPort));
+    serverApps.Add(tcpSinkHelper.Install(ueContainer));
 
     // The bearer that will carry low latency traffic
     EpsBearer lowLatBearer(EpsBearer::NGBR_LOW_LAT_EMBB);
@@ -496,8 +490,8 @@ main(int argc, char* argv[])
     // The filter for the low-latency traffic
     Ptr<EpcTft> lowLatTft = Create<EpcTft>();
     EpcTft::PacketFilter dlpfLowLat;
-    dlpfLowLat.localPortStart = dlPortLowLat;
-    dlpfLowLat.localPortEnd = dlPortLowLat;
+    dlpfLowLat.localPortStart = dlPort;
+    dlpfLowLat.localPortEnd = dlPort;
     lowLatTft->Add(dlpfLowLat);
 
 
@@ -506,14 +500,14 @@ main(int argc, char* argv[])
      */
     ApplicationContainer clientApps;
 
-    for (uint32_t i = 0; i < ueLowLatContainer.GetN()-2; ++i)
+    for (uint32_t i = 0; i < ueContainer.GetN()-2; ++i)
     {
-        Ptr<Node> ue = ueLowLatContainer.Get(i);
-        Ptr<NetDevice> ueDevice = ueLowLatNetDev.Get(i);
-        Ipv4Address ueAddress = ueLowLatIpIface.GetAddress(i);
+        Ptr<Node> ue = ueContainer.Get(i);
+        Ptr<NetDevice> ueDevice = ueNetDev.Get(i);
+        Ipv4Address ueAddress = ueIpIface.GetAddress(i);
 
         BulkSendHelper tcpClientHelper("ns3::TcpSocketFactory",
-                               InetSocketAddress(ueAddress, dlPortLowLat));
+                               InetSocketAddress(ueAddress, dlPort));
         tcpClientHelper.SetAttribute("MaxBytes", UintegerValue(0)); // Send unlimited data
 
         // The client, who is transmitting, is installed in the remote host,
@@ -527,12 +521,12 @@ main(int argc, char* argv[])
 
 
     // File exchange ue 4/5
-    BulkSendHelper fileExchangeSender("ns3::TcpSocketFactory", InetSocketAddress(ueLowLatIpIface.GetAddress(ueLowLatContainer.GetN()-1), port));
+    BulkSendHelper fileExchangeSender("ns3::TcpSocketFactory", InetSocketAddress(ueIpIface.GetAddress(ueContainer.GetN()-1), exchangePort));
     fileExchangeSender.SetAttribute("MaxBytes", UintegerValue(0)); // Unlimited
-    ApplicationContainer exchangeApps = fileExchangeSender.Install(ueLowLatContainer.Get(ueLowLatContainer.GetN()-2));
+    ApplicationContainer exchangeApps = fileExchangeSender.Install(ueContainer.Get(ueContainer.GetN()-2));
 
-    PacketSinkHelper fileExchangeSink("ns3::TcpSocketFactory", InetSocketAddress(Ipv4Address::GetAny(), port));
-    ApplicationContainer exchangeSinkApps = fileExchangeSink.Install(ueLowLatContainer.Get(ueLowLatContainer.GetN()-1));
+    PacketSinkHelper fileExchangeSink("ns3::TcpSocketFactory", InetSocketAddress(Ipv4Address::GetAny(), exchangePort));
+    ApplicationContainer exchangeSinkApps = fileExchangeSink.Install(ueContainer.Get(ueContainer.GetN()-1));
     
 
 
@@ -565,87 +559,85 @@ main(int argc, char* argv[])
 
 
 
-
+    if (remMode != "None")
+    {
+    
+        NS_LOG_UNCOND("time for REM");
 // Rem parameters
-    double xMin = -40.0;
-    double xMax = 80.0;
-    uint16_t xRes = 50;
-    double yMin = -70.0;
-    double yMax = 50.0;
-    uint16_t yRes = 50;
-    double z = 1.5;
+        double xMin = -40.0;
+        double xMax = 80.0;
+        uint16_t xRes = 50;
+        double yMin = -70.0;
+        double yMax = 50.0;
+        uint16_t yRes = 50;
+        double z = 1.5;
 
 
-     uint16_t remBwpId = 0;
-    // Radio Environment Map Generation for ccId 0
-    Ptr<NrRadioEnvironmentMapHelper> remHelper = CreateObject<NrRadioEnvironmentMapHelper>();
-    remHelper->SetMinX(xMin);
-    remHelper->SetMaxX(xMax);
-    remHelper->SetResX(xRes);
-    remHelper->SetMinY(yMin);
-    remHelper->SetMaxY(yMax);
-    remHelper->SetResY(yRes);
-    remHelper->SetZ(z);
-    remHelper->SetSimTag(simTag);
- 
-    enbNetDev.Get(0)
-        ->GetObject<NrGnbNetDevice>()
-        ->GetPhy(remBwpId)
-        ->GetSpectrumPhy()
-        ->GetBeamManager()
-        ->ChangeBeamformingVector(ueLowLatNetDev.Get(0));
- 
+         uint16_t remBwpId = 0;
+        // Radio Environment Map Generation for ccId 0
+        Ptr<NrRadioEnvironmentMapHelper> remHelper = CreateObject<NrRadioEnvironmentMapHelper>();
+        remHelper->SetMinX(xMin);
+        remHelper->SetMaxX(xMax);
+        remHelper->SetResX(xRes);
+        remHelper->SetMinY(yMin);
+        remHelper->SetMaxY(yMax);
+        remHelper->SetResY(yRes);
+        remHelper->SetZ(z);
+        remHelper->SetSimTag(simTag);
 
-        enbNetDev.Get(1)  //ueLowLatNetDev, enbNetDev
+        gnbNetDev.Get(0)
             ->GetObject<NrGnbNetDevice>()
             ->GetPhy(remBwpId)
             ->GetSpectrumPhy()
             ->GetBeamManager()
-            ->ChangeBeamformingVector(ueLowLatNetDev.Get(1));
-    
+            ->ChangeBeamformingVector(ueNetDev.Get(0));
 
- 
-    if (remMode == "BeamShape")
-    {
-        remHelper->SetRemMode(NrRadioEnvironmentMapHelper::BEAM_SHAPE);
- 
-        if (typeOfRem == "DlRem")
+
+            gnbNetDev.Get(1)  //ueNetDev, gnbNetDev
+                ->GetObject<NrGnbNetDevice>()
+                ->GetPhy(remBwpId)
+                ->GetSpectrumPhy()
+                ->GetBeamManager()
+                ->ChangeBeamformingVector(ueNetDev.Get(1));
+
+        /*
+        */
+        NS_LOG_UNCOND("REM: mode selection");
+        if (remMode == "BeamShape")
         {
-            remHelper->CreateRem(enbNetDev, ueLowLatNetDev.Get(0), remBwpId);
+            remHelper->SetRemMode(NrRadioEnvironmentMapHelper::BEAM_SHAPE);
+
+            if (typeOfRem == "DlRem")
+            {
+                remHelper->CreateRem(gnbNetDev, ueNetDev.Get(0), remBwpId);
+            }
+            else if (typeOfRem == "UlRem")
+            {
+                remHelper->CreateRem(ueNetDev, gnbNetDev.Get(0), remBwpId);
+            }
+            else
+            {
+                NS_ABORT_MSG("typeOfRem not supported. "
+                             "Choose among 'DlRem', 'UlRem'.");
+            }
         }
-        else if (typeOfRem == "UlRem")
+        else if (remMode == "CoverageArea")
         {
-            remHelper->CreateRem(ueLowLatNetDev, enbNetDev.Get(0), remBwpId);
+            remHelper->SetRemMode(NrRadioEnvironmentMapHelper::COVERAGE_AREA);
+            remHelper->CreateRem(gnbNetDev, ueNetDev.Get(0), remBwpId);
+
+
+        }
+        else if (remMode == "UeCoverage")
+        {
+            remHelper->SetRemMode(NrRadioEnvironmentMapHelper::UE_COVERAGE);
+            remHelper->CreateRem(ueNetDev, gnbNetDev.Get(0), remBwpId);
         }
         else
         {
-            NS_ABORT_MSG("typeOfRem not supported. "
-                         "Choose among 'DlRem', 'UlRem'.");
+            NS_ABORT_MSG("Not supported remMode.");
         }
-    }
-    else if (remMode == "CoverageArea")
-    {
-        remHelper->SetRemMode(NrRadioEnvironmentMapHelper::COVERAGE_AREA);
-        remHelper->CreateRem(enbNetDev, ueLowLatNetDev.Get(0), remBwpId);
-    }
-    else if (remMode == "UeCoverage")
-    {
-        remHelper->SetRemMode(NrRadioEnvironmentMapHelper::UE_COVERAGE);
-        remHelper->CreateRem(ueLowLatNetDev, enbNetDev.Get(0), remBwpId);
-    }
-    else
-    {
-        NS_ABORT_MSG("Not supported remMode.");
-    }
-    
-      // here's a minimal gnuplot script that will plot the above:
-     // 
-     // set view map;
-     // set term x11;
-     // set xlabel "X"
-     // set ylabel "Y"
-     // set cblabel "SINR (dB)"
-     // plot "rem.out" using ($1):($2):(10*log10($4)) with image
+        }
 
 
     Simulator::Stop(simTime);
@@ -658,6 +650,7 @@ main(int argc, char* argv[])
     config.ConfigureAttributes ();
     */
 
+   NS_LOG_UNCOND("time for flow");
     // Print per-flow statistics
     monitor->CheckForLostPackets();
     Ptr<Ipv4FlowClassifier> classifier =
@@ -684,7 +677,7 @@ main(int argc, char* argv[])
          i != stats.end();
          ++i)
     {
-        Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow(i->first);
+       Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow(i->first);
         std::stringstream protoStream;
         protoStream << (uint16_t)t.protocol;
         if (t.protocol == 6)
