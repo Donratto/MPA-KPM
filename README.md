@@ -47,9 +47,7 @@ Study the available applications in NS-3. Choose suitable applications to simula
 - Number of gNodeBs: 2
 - Number of UEs per gNnodeB: 5
 - Number of servers: 1
-- Addressing table:
 
-- 
 ### Frequency selection:
 
 Since using milimeter waves is required, our team decided to use the following frequencies:
