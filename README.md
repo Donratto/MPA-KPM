@@ -105,19 +105,29 @@ There are no specific rules for setting the bandwidth value. However, what is kn
 
 ### GridScenarioHelper
 
-The GridScenarioHelper class in the script is used to create and configure a grid-based deployment of network nodes (gNBs and UEs) in a simulation scenario. It simplifies the process of arranging nodes in a structured, grid-like layout and managing their spatial properties.
+The GridScenarioHelper class in the script is used to create and configure a grid-based deployment of network nodes (gNBs and UEs) in a simulation scenario. It simplifies the process of arranging nodes in a structured, grid-like layout and managing their spatial properties. In case of our project, determining the position of UEs is not clear. To set their position, random generator is used, so we can predict only a radius, in which they can be placed. However, in our case, the same random number generator is used each time, therefore UEs will end up always in the same position.
 
 The following table shows the position of devices used in our scenario:
 
-| **Device** | **X Position (m)** | **Y Position (m)** | **Z Position (m)** |
-|------------|---------------------|---------------------|---------------------|
-| gNB 0      | 0.0                 | 0.0                 | 1.5                 |
-| gNB 1      | 5.0                 | 0.0                 | 1.5                 |
-| UE 0       | 0.5                 | 0.5                 | 1.5                 |
-| UE 1       | 1.5                 | 1.5                 | 1.5                 |
-| UE 2       | 2.5                 | 2.5                 | 1.5                 |
-| UE 3       | 3.5                 | 3.5                 | 1.5                 |
-| UE 4       | 4.5                 | 4.5                 | 1.5                 |
+| **Device**        | **X Position**    | **Y Position**    | **Z Position** |
+|--------------------|-------------------|-------------------|----------------|
+| gNB 0             | 10.0             | 0.0              | 1.5            |
+| gNB 1             | 0.0              | 0.0              | 1.5            |
+| UE 0              | 2.107819727      | 2.07726695       | 1.5            |
+| UE 1              | 12.09425054      | 2.351660078      | 1.5            |
+| UE 2              | 1.863272216      | 1.303696692      | 1.5            |
+| UE 3              | 12.68766751      | 0.8667490141     | 1.5            |
+| UE 4              | 1.530488989      | 1.397013425      | 1.5            |
+| PGW               | 0.0              | 40.0             | 1.5            |
+| Remote Host       | 0.0              | 50.0             | 1.5            |
+| SGW               | 68.0             | 81.0             | 1.5            |
+| MME               | 34.0             | 14.0             | 1.5            |
+
+
+
+
+
+
 
 
 
