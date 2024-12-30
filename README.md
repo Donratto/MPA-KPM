@@ -93,10 +93,12 @@ There are no specific rules for setting the bandwidth value. However, what is kn
 
 | **Device**        | **IP Address Range** | **Assigned IPs**                     |
 |--------------------|-----------------------|---------------------------------------|
-| Remote Host        | `1.0.0.0/8`          | First available address in this range|
-| Packet Gateway (PGW)| `1.0.0.0/8`         | Address assigned via `Ipv4AddressHelper`|
-| User Equipment (UE)| `7.0.0.0/8`          | - UE 0: `7.0.0.1` <br> - UE 1: `7.0.0.2` <br> - ... <br> - UE \(N-1\): `7.0.0.N` |
-| Base Stations (gNB)| Not assigned         | Operate at Layer 2 - no IPs assigned  |
+| Remote Host        | `1.0.0.0/8`          | `1.0.0.2`                             |
+| Packet Gateway (PGW)| `1.0.0.0/8`         | `1.0.0.1` <br> Additional: `14.0.0.5`, `7.0.0.1` (multiple interfaces) |
+| User Equipment (UE)| `7.0.0.0/8`          | - UE 0: `7.0.0.2` <br> - UE 1: `7.0.0.3` <br> - UE 2: `7.0.0.4` <br> - UE 3: `7.0.0.5` <br> - UE 4: `7.0.0.6` |
+| Base Stations (gNB)| `10.0.0.0/8`         | - gNB 0: `10.0.0.5` <br> - gNB 1: `10.0.0.9` |
+| Mobility Management Entity (MME) | Not assigned         | Integrated into EPC (control plane only) |
+
 
 
 ### GridScenarioHelper
