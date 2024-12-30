@@ -1,38 +1,5 @@
 /* -*-  Mode: C++; c-file-style: "gnu"; indent-tabs-mode:nil; -*- */
-
-// Copyright (c) 2019 Centre Tecnologic de Telecomunicacions de Catalunya (CTTC)
-//
-// SPDX-License-Identifier: GPL-2.0-only
-
-/**
- * \ingroup examples
- * \file cttc-nr-demo.cc
- * \brief A cozy, simple, NR demo (in a tutorial style)
- *
- * This example describes how to setup a simulation using the 3GPP channel model
- * from TR 38.900. This example consists of a simple grid topology, in which you
- * can choose the number of gNbs and UEs. Have a look at the possible parameters
- * to know what you can configure through the command line.
- *
- * With the default configuration, the example will create two flows that will
- * go through two different subband numerologies (or bandwidth parts). For that,
- * specifically, two bands are created, each with a single CC, and each CC containing
- * one bandwidth part.
- *
- * The example will print on-screen the end-to-end result of one (or two) flows,
- * as well as writing them on a file.
- *
- * \code{.unparsed}
-$ ./ns3 run "cttc-nr-demo --PrintHelp"
-    \endcode
- *
- */
-
-/*
- * Include part. Often, you will have to include the headers for an entire module;
- * do that by including the name of the module you need with the suffix "-module.h".
- */
-
+// main source of inspiration "cttc-nr-demo"
 #include "ns3/antenna-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/buildings-module.h"
@@ -45,11 +12,10 @@ $ ./ns3 run "cttc-nr-demo --PrintHelp"
 #include "ns3/network-module.h"
 #include "ns3/nr-module.h"
 #include "ns3/point-to-point-module.h"
-#include "ns3/nr-radio-environment-map-helper.h"
 
-/*
- * Use, always, the namespace ns3. All the NR classes are inside such namespace.
- */
+#include "ns3/nr-radio-environment-map-helper.h"
+#include "ns3/netanim-module.h"
+
 using namespace ns3; 
 
 /*
@@ -63,16 +29,13 @@ main(int argc, char* argv[])
 {
     std::string remMode = "None";
     std::string typeOfRem = "DlRem";
-    /*
-     * Variables that represent the parameters we will accept as input by the
-     * command line. Each of them is initialized with a default value, and
-     * possibly overridden below when command-line arguments are parsed.
-     */
+    
     // Scenario parameters (that we will use inside this script):
     uint16_t gNbNum = 2;
     uint16_t ueNum = 5;
     bool logging = true;
     bool doubleOperationalBand = true;
+    bool xmlAnim = false;
 
     // Traffic parameters (that we will use inside this script):
     uint32_t udpPacketSizeULL = 100;
@@ -103,9 +66,10 @@ main(int argc, char* argv[])
      * From here, we instruct the ns3::CommandLine class of all the input parameters
      * that we may accept as input, as well as their description, and the storage
      * variable.
+     * to view these commands in cmd write ""./ns3 run scratch/<script_name> -- --PrintHelp"
      */
     CommandLine cmd(__FILE__);
-
+    
     cmd.AddValue("gNbNum", "The number of gNbs in multiple-ue topology", gNbNum);
     cmd.AddValue("ueNum", "The number of UE in multiple-ue topology", ueNum);
     cmd.AddValue("logging", "Enable logging", logging);
@@ -157,6 +121,10 @@ main(int argc, char* argv[])
     cmd.AddValue("typeOfRem",
                  "The type of Rem to generate (DL or UL) in the case of BeamShape option. Choose among "
                  "'DlRem', 'UlRem'.",typeOfRem);
+    cmd.AddValue("xmlAnim",
+                 "Generate xml file describing network animation?",xmlAnim);
+
+                 
 
     // Parse the command line
     cmd.Parse(argc, argv);
@@ -543,7 +511,7 @@ main(int argc, char* argv[])
     exchangeSinkApps.Stop(simTime);
 
     // enable the traces provided by the nr module
-    // nrHelper->EnableTraces();
+     nrHelper->EnableTraces();
 
     FlowMonitorHelper flowmonHelper;
     NodeContainer endpointNodes;
@@ -556,13 +524,53 @@ main(int argc, char* argv[])
     monitor->SetAttribute("JitterBinWidth", DoubleValue(0.001));
     monitor->SetAttribute("PacketSizeBinWidth", DoubleValue(20));
 
+//
+// Animation
+//snaha schovvani tvorby animace za if, ale to uplne nefuguje
+//pouze se vytvori mapa s pozicemi zarizeni
+    if (xmlAnim == true){}
+    
+        //nrHelper->EnableTraces(); //required in order to show simulated communication
+
+        unsigned long long testValue = 0xFFFFFFFFFFFFFFFF;
+        AnimationInterface::SetConstantPosition(remoteHost, 0, 50);
+        AnimationInterface::SetConstantPosition(pgw, 0, 40);
+        AnimationInterface anim("xmlAnim.xml");
+
+
+        /// Optional steps
+        anim.SetMobilityPollInterval (Seconds (1)); // step 1
+        //anim.EnablePacketMetadata(true); // step 5
+
+        //*R
+        anim.SetMaxPktsPerTraceFile(testValue);
+        anim.UpdateNodeDescription(pgw, "PGW");
+        anim.UpdateNodeDescription(remoteHost, "Remote_Host");
+
+        for (uint32_t u = 0; u < ueNetDev.GetN(); ++u)
+        {
+            anim.UpdateNodeDescription(ueContainer.Get(u), "ue_" + std::to_string(u));
+            //AnimationInterface::SetConstantPosition(ueContainer.Get(u), 10 + 15 * u, 20);
+            anim.UpdateNodeColor(ueContainer.Get(u), 127, 127, 127); // Optional
+        }
+
+        for (uint32_t u = 0; u < gnbNetDev.GetN(); ++u)
+        {
+            anim.UpdateNodeDescription(gridScenario.GetBaseStations().Get(u), "gnb_" + std::to_string(u));
+            //AnimationInterface::SetConstantPosition(gridScenario.GetBaseStations().Get(u), 10 + 40 * u, 30);
+            anim.UpdateNodeColor(gridScenario.GetBaseStations().Get(u), 0, 255, 0); // Optional
+        }
+    
+    
+
+
 
 
 
     if (remMode != "None")
     {
     
-        NS_LOG_UNCOND("time for REM");
+        
 // Rem parameters
         double xMin = -40.0;
         double xMax = 80.0;
@@ -602,7 +610,6 @@ main(int argc, char* argv[])
 
         /*
         */
-        NS_LOG_UNCOND("REM: mode selection");
         if (remMode == "BeamShape")
         {
             remHelper->SetRemMode(NrRadioEnvironmentMapHelper::BEAM_SHAPE);
@@ -650,7 +657,6 @@ main(int argc, char* argv[])
     config.ConfigureAttributes ();
     */
 
-   NS_LOG_UNCOND("time for flow");
     // Print per-flow statistics
     monitor->CheckForLostPackets();
     Ptr<Ipv4FlowClassifier> classifier =
