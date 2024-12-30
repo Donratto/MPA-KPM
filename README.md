@@ -131,6 +131,7 @@ The following table shows the position of devices used in our scenario:
 ### Simulation RUN
 The output of the simulation is a basic listing of the communication flow and important values that accompany the simulation, such as delay, throughput and packet loss, in the console bar. At the end we have these values averaged as well:
 
+```
 Flow 1 (7.0.0.5:49153 -> 7.0.0.6:1235) proto TCP
   Tx Packets: 10399
   Tx Bytes:   5875280
@@ -220,12 +221,15 @@ Flow 8 (7.0.0.6:1235 -> 7.0.0.5:49153) proto TCP
   Packet loss: 1.361338%
   Rx Packets: 5072
 
-
-  Mean flow throughput: 66.905840
+ Mean flow throughput: 66.905840
   Mean flow delay: 5.206680
   Mean flow packet loss: 0.955458%
 
-Dále se vytvoří pomocí NrRadioEnvironmentMapHelper mapa rádiového prostředí v souboru xmlAnim.xml, pomocí které můžeme provést vizualizaci simulace v programu NetAnim. Dále se pomocí NrRadioEnvironmentMapHelper může vykreslit kormě mapy prostředí také Coverage area, Beamshape a Beamshape pro UL.
+```
+
+
+
+Next, the NrRadioEnvironmentMapHelper creates a map of the radio environment in the xmlAnim.xml file, which can be used to visualize the simulation in NetAnim. In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR, SINR, IPSD and SIR.
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
 
