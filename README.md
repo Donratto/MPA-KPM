@@ -47,6 +47,8 @@ Study the available applications in NS-3. Choose suitable applications to simula
 - Number of gNodeBs: 2
 - Number of UEs: 5
 - Number of PGWs: 1
+- Number of MMEs: 1
+- Number of SGWs: 1
 - Number of remote hosts / servers: 1
 - Number of internet devices: 2
 
@@ -122,41 +124,4 @@ The following table shows the position of devices used in our scenario:
 
 
 
-# NS3
 
-[ns3 examples](https://cttc-lena.gitlab.io/nr/html/group__examples.html)
-
-
-# Git
-[git cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet/)
-## usage
-#### updates local
-```
-git fetch
-git merge
-```
-**or**
-```
-git pull
-```
-#### updates remote 
-```
-git add <file>|*
-git commit -m "<message>"
-git push
-```
-## access
-```
-sudo apt install git
-sudo apt install gh
-
-gh auth login
-
-cd home/student/lena5g/ns-3-dev/scratch/
-mkdir MPA-KPM
-cd MPA-KPM
-
-git config user.name "<name>"
-
-gh repo clone Donratto/MPA-KPM
-```
