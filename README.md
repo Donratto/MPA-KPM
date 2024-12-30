@@ -45,7 +45,7 @@ Study the available applications in NS-3. Choose suitable applications to simula
 ### Given Parameters from the assigment:
 
 - Number of gNodeBs: 2
-- Number of UEs per gNnodeB: 5
+- Number of UEs: 5
 - Number of servers: 1
 - Number of PGWs: 1
 - Number of remote hosts: 1
