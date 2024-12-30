@@ -259,12 +259,6 @@ Next, the NrRadioEnvironmentMapHelper creates a map of the radio environment in 
 
 ### With different simulation lengths
 
-
-###  Issues encountered during the simulation 
-
-
-### Recommendations for improving network performance
-
 The average values of throughput, delay and packet loss were changed when the duration of the simulation was varied. The simulation durations were performed with values of 1000, 2000 and 3000 ms. 
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/ms1000.png)
@@ -272,5 +266,7 @@ The average values of throughput, delay and packet loss were changed when the du
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/ms3000.png)
 
 
+###  Issues encountered during the simulation 
 
+### Recommendations for improving network performance
 
