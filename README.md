@@ -260,7 +260,10 @@ Next, the NrRadioEnvironmentMapHelper creates a map of the radio environment in 
 ### With different simulation lengths
 
 
+###  Issues encountered during the simulation 
 
+
+### Recommendations for improving network performance
 
 
 
