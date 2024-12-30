@@ -233,7 +233,12 @@ Next, the NrRadioEnvironmentMapHelper creates a map of the radio environment in 
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
 
+Coverage area
 
+![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Coverage_area/CA_nr-rem-default-snr.png)
+![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Coverage_area/CA_nr-rem-default-sir.png)
+![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Coverage_area/CA_nr-rem-default-sinr.png)
+![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Coverage_area/CA_nr-rem-default-ipsd.png)
 
 ### With different sets of parameters
 
