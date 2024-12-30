@@ -75,7 +75,7 @@ There are five numerology types:
 | 3                   | 120 kHz                   | High-speed, mmWave (short latency)        | mmWave                   |
 | 4                   | 240 kHz                   | Future ultra-low-latency applications     | mmWave                   |
 
-In this very usecase, we have decided to choose numerology number 3 and number 4. Those numerologies are suitable for milimeter waves technologies and provide more robust solution against Doppler effect in dense urban areas.
+In this very usecase, we have decided to choose numerology number 3 and number 4. Those numerologies are suitable for milimeter wave technologies and provide more robust solution against Doppler effect in dense urban areas.
 
 ### TX Power
 
