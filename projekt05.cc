@@ -122,7 +122,8 @@ main(int argc, char* argv[])
                  "The type of Rem to generate (DL or UL) in the case of BeamShape option. Choose among "
                  "'DlRem', 'UlRem'.",typeOfRem);
     cmd.AddValue("xmlAnim",
-                 "Generate xml file describing network animation?",xmlAnim);
+                 "Set 'true' to generate xml file describing communication network for NetAnim,"
+                 "'false' will generate only overview, no metadata",xmlAnim);
 
                  
 
@@ -511,7 +512,7 @@ main(int argc, char* argv[])
     exchangeSinkApps.Stop(simTime);
 
     // enable the traces provided by the nr module
-     nrHelper->EnableTraces();
+    //nrHelper->EnableTraces();
 
     FlowMonitorHelper flowmonHelper;
     NodeContainer endpointNodes;
@@ -526,18 +527,27 @@ main(int argc, char* argv[])
 
 //
 // Animation
-//snaha schovvani tvorby animace za if, ale to uplne nefuguje
+//snaha schovani tvorby animace za if, ale to uplne nefuguje
 //pouze se vytvori mapa s pozicemi zarizeni
-    if (xmlAnim == true){}
+    
     
         //nrHelper->EnableTraces(); //required in order to show simulated communication
 
         unsigned long long testValue = 0xFFFFFFFFFFFFFFFF;
-        AnimationInterface::SetConstantPosition(remoteHost, 0, 50);
-        AnimationInterface::SetConstantPosition(pgw, 0, 40);
+        AnimationInterface::SetConstantPosition(remoteHost, 10, 7.5);
+        AnimationInterface::SetConstantPosition(pgw, 10, 5);
+        AnimationInterface::SetConstantPosition(NodeList::GetNode(8),5,5);
+        AnimationInterface::SetConstantPosition(NodeList::GetNode(9), 0,5);
         AnimationInterface anim("xmlAnim.xml");
+        for (NodeList::Iterator i = NodeList::Begin(); i != NodeList::End(); ++i)
+    {
+        Ptr<Node> n = *i;
+        anim.UpdateNodeSize(n,0.25,0.25);
+    }
 
-
+        anim.UpdateNodeDescription(8, "SGW");
+        anim.UpdateNodeDescription(9, "MME");
+        anim.UpdateNodeColor(10, 255, 200, 0);
         /// Optional steps
         anim.SetMobilityPollInterval (Seconds (1)); // step 1
         //anim.EnablePacketMetadata(true); // step 5
@@ -559,7 +569,31 @@ main(int argc, char* argv[])
             anim.UpdateNodeDescription(gridScenario.GetBaseStations().Get(u), "gnb_" + std::to_string(u));
             //AnimationInterface::SetConstantPosition(gridScenario.GetBaseStations().Get(u), 10 + 40 * u, 30);
             anim.UpdateNodeColor(gridScenario.GetBaseStations().Get(u), 0, 255, 0); // Optional
+            //AnimationInterface::SetConstantPosition(gridScenario.GetBaseStations().Get(u), 10 + 40 * u, 30);
         }
+        if (xmlAnim != false){
+            nrHelper->EnableTraces();
+            anim.EnablePacketMetadata(true);
+    }
+
+        //access to nodes  via indexes
+/*
+        NS_LOG_UNCOND("PGW");
+        NS_LOG_UNCOND(epcHelper->GetPgwNode());
+        NS_LOG_UNCOND(NodeList::GetNode(7));
+        NS_LOG_UNCOND("SGW");
+        NS_LOG_UNCOND(epcHelper->GetSgwNode());
+        NS_LOG_UNCOND(NodeList::GetNode(8));
+        NS_LOG_UNCOND("MME");
+        NS_LOG_UNCOND(NodeList::GetNode(9));
+        for (NodeList::Iterator i = NodeList::Begin(); i != NodeList::End(); ++i)
+    {
+        Ptr<Node> n = *i;
+        uint16_t it = std::distance( NodeList::Begin(), i );
+        NS_LOG_UNCOND(it);
+        NS_LOG_UNCOND(n);
+    }
+ */
     
     
 
