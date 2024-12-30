@@ -124,6 +124,8 @@ The following table shows the position of devices used in our scenario:
 | MME               | 34.0             | 14.0             |
 
 
+![Visualisation of the output from GridScenarioHelper]([https://github.com/your-username/your-repo-name/blob/main/image.png](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png))
+
 
 
 
