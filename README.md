@@ -46,9 +46,8 @@ Study the available applications in NS-3. Choose suitable applications to simula
 
 - Number of gNodeBs: 2
 - Number of UEs: 5
-- Number of servers: 1
 - Number of PGWs: 1
-- Number of remote hosts: 1
+- Number of remote hosts / servers: 1
 - Number of internet devices: 2
 
 ### Frequency selection:
