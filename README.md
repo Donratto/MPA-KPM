@@ -109,7 +109,7 @@ The GridScenarioHelper class in the script is used to create and configure a gri
 
 The following table shows the position of devices used in our scenario:
 
-| **Device**        | **X Position**    | **Y Position**    | 
+| **Device**        | **X Position**    | **Y Position**    |
 |--------------------|-------------------|-------------------|
 | gNB 0             | 10.0             | 0.0              | 
 | gNB 1             | 0.0              | 0.0              | 
@@ -118,10 +118,11 @@ The following table shows the position of devices used in our scenario:
 | UE 2              | 1.863272216      | 1.303696692      | 
 | UE 3              | 12.68766751      | 0.8667490141     | 
 | UE 4              | 1.530488989      | 1.397013425      | 
-| PGW               | 0.0              | 40.0             |
-| Remote Host       | 0.0              | 50.0             |
-| SGW               | 68.0             | 81.0             | 
-| MME               | 34.0             | 14.0             |
+| PGW               | 10.0             | 5.0              | 
+| SGW               | 5.0              | 5.0              | 
+| MME               | 0.0              | 5.0              | 
+| Remote Host       | 10.0             | 7.5              | 
+
 
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
