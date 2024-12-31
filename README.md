@@ -82,7 +82,7 @@ In this very usecase, we have decided to choose numerology number 3 and number 4
 
 ### TX Power
 
-In our case, the maximum distance of the UE from gNodeB is about 4.24 meters. This distance is considered as a small cell. In small cells, TX power is used in the range of 23.1 dBm - 30 dBm. A more precise TX power value depends on the physical environmental conditions and the determination of the specific value is done by determining the loss rate.
+In our case, the maximum distance of the UE from the attached gNodeB can be about 4.24 meters. This distance is considered as a small cell. In small cells, TX power is used in the range of 23.1 dBm - 30 dBm. A more precise TX power value depends on the physical environmental conditions and the determination of the specific value is done by determining the loss rate.
 
 
 ### Bandwidth
