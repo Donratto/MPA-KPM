@@ -175,10 +175,6 @@ The most significant differences can be observed in the following output, where 
 
 
 
-
-
-
-
 In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR, SINR, IPSD and SIR.
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
@@ -207,7 +203,7 @@ In addition to the environment map, the NrRadioEnvironmentMapHelper can also be 
 
 ###  Issues encountered during the simulation 
 
-During this project, our team has encountered several problems, mainly regarded to the NS3 tool. The lack of the documentation in some parts of the project also with issues when determining cause of the problem in the software made some parts of this project very challenging.   
+During this project, our team encountered several problems, mainly related to the NS3 tool. The lack of documentation in some parts of the project, along with difficulties in determining the causes of problems in the software, made certain aspects of this project very challenging. 
 
 ### Recommendations for improving network performance
 
