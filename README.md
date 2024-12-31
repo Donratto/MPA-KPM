@@ -50,7 +50,6 @@ Study the available applications in NS-3. Choose suitable applications to simula
 - Number of MMEs: 1
 - Number of SGWs: 1
 - Number of remote hosts / servers: 1
-- Number of internet devices: 2
 
 ### Frequency selection:
 
@@ -83,7 +82,7 @@ In this very usecase, we have decided to choose numerology number 3 and number 4
 
 ### TX Power
 
-In our case the distance of the UE from gNodeB is about 20 meters. This distance is considered as a small cell. In small cells, TX power is used in the range of 23.1 dBm - 30 dBm. A more precise TX power value depends on the physical environmental conditions and the determination of the specific value is done by determining the loss rate.
+In our case the distance of the UE from gNodeB is about 4.24 meters. This distance is considered as a small cell. In small cells, TX power is used in the range of 23.1 dBm - 30 dBm. A more precise TX power value depends on the physical environmental conditions and the determination of the specific value is done by determining the loss rate.
 
 
 ### Bandwidth
@@ -138,10 +137,6 @@ For the purpose of this documentation, you can find a set of different outputs b
 
 The first simulation has the following set of parameters (possition of each device is as it is shown above):
 
-- `udpPacketSizeULL`: 100
-- `udpPacketSizeBe`: 1252
-- `lambdaULL`: 10000
-- `lambdaBe`: 10000
 - `simTime`: 1000 ms
 - `AppStartTime`: 400 ms
 - `numerologyBwp1`: 4
