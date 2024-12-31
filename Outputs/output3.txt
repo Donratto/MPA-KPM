@@ -1,0 +1,93 @@
+Flow 1 (7.0.0.5:49153 -> 7.0.0.6:1235) proto TCP
+  Tx Packets: 2544
+  Tx Bytes:   1494804
+  TxOffered:  19.930720 Mbps
+  Rx Bytes:   1473048
+  Throughput: 19.640640 Mbps
+  Mean delay:  8.185647 ms
+  Mean jitter:  0.117048 ms
+  Lost Packets: 37
+  Packet loss: 1.454403%
+  Rx Packets: 2507
+Flow 2 (1.0.0.2:49153 -> 7.0.0.2:1234) proto TCP
+  Tx Packets: 9757
+  Tx Bytes:   5513192
+  TxOffered:  73.509227 Mbps
+  Rx Bytes:   5442128
+  Throughput: 72.561707 Mbps
+  Mean delay:  4.823539 ms
+  Mean jitter:  0.026563 ms
+  Lost Packets: 126
+  Packet loss: 1.291381%
+  Rx Packets: 9631
+Flow 3 (1.0.0.2:49154 -> 7.0.0.3:1234) proto TCP
+  Tx Packets: 5587
+  Tx Bytes:   3256032
+  TxOffered:  43.413760 Mbps
+  Rx Bytes:   3256032
+  Throughput: 43.413760 Mbps
+  Mean delay:  1.991652 ms
+  Mean jitter:  0.030116 ms
+  Lost Packets: 0
+  Packet loss: 0.000000%
+  Rx Packets: 5587
+Flow 4 (1.0.0.2:49155 -> 7.0.0.4:1234) proto TCP
+  Tx Packets: 11455
+  Tx Bytes:   6470864
+  TxOffered:  86.278187 Mbps
+  Rx Bytes:   6389648
+  Throughput: 85.195307 Mbps
+  Mean delay:  4.110148 ms
+  Mean jitter:  0.021612 ms
+  Lost Packets: 144
+  Packet loss: 1.257093%
+  Rx Packets: 11311
+Flow 5 (7.0.0.3:1234 -> 1.0.0.2:49154) proto TCP
+  Tx Packets: 2794
+  Tx Bytes:   145292
+  TxOffered:  1.937227 Mbps
+  Rx Bytes:   138636
+  Throughput: 1.848480 Mbps
+  Mean delay:  0.810527 ms
+  Mean jitter:  0.062774 ms
+  Lost Packets: 128
+  Packet loss: 4.581246%
+  Rx Packets: 2666
+Flow 6 (7.0.0.2:1234 -> 1.0.0.2:49153) proto TCP
+  Tx Packets: 4816
+  Tx Bytes:   250436
+  TxOffered:  3.339147 Mbps
+  Rx Bytes:   247056
+  Throughput: 3.294080 Mbps
+  Mean delay:  8.688341 ms
+  Mean jitter:  0.167120 ms
+  Lost Packets: 65
+  Packet loss: 1.349668%
+  Rx Packets: 4751
+Flow 7 (7.0.0.4:1234 -> 1.0.0.2:49155) proto TCP
+  Tx Packets: 5656
+  Tx Bytes:   294116
+  TxOffered:  3.921547 Mbps
+  Rx Bytes:   291204
+  Throughput: 3.882720 Mbps
+  Mean delay:  8.168134 ms
+  Mean jitter:  0.049912 ms
+  Lost Packets: 56
+  Packet loss: 0.990099%
+  Rx Packets: 5600
+Flow 8 (7.0.0.6:1235 -> 7.0.0.5:49153) proto TCP
+  Tx Packets: 1302
+  Tx Bytes:   68476
+  TxOffered:  0.913013 Mbps
+  Rx Bytes:   67332
+  Throughput: 0.897760 Mbps
+  Mean delay:  8.349678 ms
+  Mean jitter:  0.092557 ms
+  Lost Packets: 22
+  Packet loss: 1.689708%
+  Rx Packets: 1280
+
+
+  Mean flow throughput: 28.841807
+  Mean flow delay: 5.640958
+  Mean flow packet loss: 1.576700%
