@@ -159,6 +159,10 @@ It has been discovered, that changing the simulation time has a signifficant eff
 
 
 
+In the case of small changes in `totalTxPower`, we see almost no change in the resulting values. But if we change the value of `totalTxPower` to -100, for example, the resulting values are significantly different. Because of the small distances of the network elements from each other, there is no need for higher power, but in case of a rapid reduction we can observe changes even for small distances.
+
+[Output 3](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/lowPower.txt)
+
 
 The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is decreased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
 
@@ -166,16 +170,14 @@ The most significant differences can be observed in the following output, where 
 ![updated positions](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/image.png)
 
 
-[Output 3](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output3.txt)
+[Output 4](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output3.txt)
 
-In the case of small changes in `totalTxPower`, we see almost no change in the resulting values. But if we change the value of `totalTxPower` to -100, for example, the resulting values are significantly different. Because of the small distances of the network elements from each other, there is no need for higher power, but in case of a rapid reduction we can observe changes even for small distances.
 
-[Output 4](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/lowPower.txt)
 
 
 The NrRadioEnvironmentMapHelper can be used to draw the Coverage area, Beamshape for UL and for DL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Interference Power Spectral Density) and SIR (Signal-to-Interference Ratio).
 
-![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
+
 
 
 
