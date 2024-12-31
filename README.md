@@ -204,16 +204,6 @@ Next, the NrRadioEnvironmentMapHelper creates a map of the radio environment in 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape_ul/nr-rem-default-sinr.png)
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape_ul/nr-rem-default-ipsd.png)
 
-### With different sets of parameters
-
-### With different simulation lengths
-
-The average values of throughput, delay and packet loss were changed when the duration of the simulation was varied. The simulation durations were performed with values of 1000, 2000 and 3000 ms. 
-
-![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/ms1000.png)
-![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/ms2000.png)
-![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/ms3000.png)
-
 
 ###  Issues encountered during the simulation 
 
