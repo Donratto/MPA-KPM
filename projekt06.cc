@@ -141,8 +141,6 @@ main(int argc, char* argv[])
 
     if (logging)
     {
-        LogComponentEnable("UdpClient", LOG_LEVEL_INFO);
-        LogComponentEnable("UdpServer", LOG_LEVEL_INFO);
         LogComponentEnable("LtePdcp", LOG_LEVEL_INFO);
     }
     
