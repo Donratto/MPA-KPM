@@ -175,7 +175,9 @@ The most significant differences can be observed in the following output, where 
 
 
 
-The NrRadioEnvironmentMapHelper can be used to draw the Coverage area, Beamshape for UL and for DL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Interference Power Spectral Density) and SIR (Signal-to-Interference Ratio).
+### Radio environment maps
+
+The NrRadioEnvironmentMapHelper can be used to draw the Coverage area and Beamshape for UL and for DL. In Coverage area and Beamshape for UL and for DL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Interference Power Spectral Density) and SIR (Signal-to-Interference Ratio).
 
 
 
