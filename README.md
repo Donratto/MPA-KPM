@@ -172,9 +172,11 @@ In addition to the environment map, the NrRadioEnvironmentMapHelper can also be 
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
 
-[Output 4](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/lowPower.txt)
 
 In the case of small changes in `totalTxPower`, we see almost no change in the resulting values. But if we change the value of `totalTxPower` to -100, for example, the resulting values are significantly different. Because of the small distances of the network elements from each other, there is no need for higher power, but in case of a rapid reduction we can observe changes even for small distances.
+
+[Output 4](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/lowPower.txt)
+
 
 ### Coverage area
 
