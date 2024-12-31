@@ -175,7 +175,7 @@ The most significant differences can be observed in the following output, where 
 
 
 
-In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR, SINR, IPSD and SIR.
+In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Impulse Signal Power Distribution) and SIR (Signal-to-Interference Ratio).
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
 
