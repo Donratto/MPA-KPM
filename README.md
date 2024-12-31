@@ -157,7 +157,9 @@ It has been discovered, that changing the simulation time has a signifficant eff
 
 [Output 2](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output2.txt)
 
-Changing the `totalTxPower` value while maintaining the same position of all devices has no effect on the output of the simulation.
+In the case of small changes in `totalTxPower`, we see almost no change in the resulting values. But if we change the value of `totalTxPower` to -100, for example, the resulting values are significantly different. Because of the small distances of the network elements from each other, there is no need for higher power, but in case of a rapid reduction we can observe changes even for small distances.
+
+![updated positions](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/lowTxPower.png)
 
 
 The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is decreased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
