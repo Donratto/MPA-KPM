@@ -157,9 +157,7 @@ It has been discovered, that changing the simulation time has a signifficant eff
 
 [Output 2](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output2.txt)
 
-In the case of small changes in `totalTxPower`, we see almost no change in the resulting values. But if we change the value of `totalTxPower` to -100, for example, the resulting values are significantly different. Because of the small distances of the network elements from each other, there is no need for higher power, but in case of a rapid reduction we can observe changes even for small distances.
 
-![updated positions](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/lowTxPower.png)
 
 
 The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is decreased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
@@ -170,11 +168,15 @@ The most significant differences can be observed in the following output, where 
 
 [Output 3](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output3.txt)
 
-
-
 In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Impulse Signal Power Distribution) and SIR (Signal-to-Interference Ratio).
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
+
+### change totalTxPower
+
+In the case of small changes in `totalTxPower`, we see almost no change in the resulting values. But if we change the value of `totalTxPower` to -100, for example, the resulting values are significantly different. Because of the small distances of the network elements from each other, there is no need for higher power, but in case of a rapid reduction we can observe changes even for small distances.
+
+![updated positions](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/lowTxPower.png)
 
 ### Coverage area
 
