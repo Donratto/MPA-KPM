@@ -130,7 +130,13 @@ The following table shows the position of devices used in our scenario:
 
 
 ### Simulation RUN
-The output of the simulation is a basic listing of the communication flow and important values that accompany the simulation, such as delay, throughput and packet loss, in the console bar. At the end we have these values averaged as well:
+
+The simulation has been executed several times, always with a different sets of parameters.
+The output of the simulation is a basic listing of the communication flow and important values that accompany the simulation, such as delay, throughput and packet loss, in the console bar.
+
+
+
+
 
 ```
 Flow 1 (7.0.0.5:49153 -> 7.0.0.6:1235) proto TCP
@@ -267,6 +273,8 @@ The average values of throughput, delay and packet loss were changed when the du
 
 
 ###  Issues encountered during the simulation 
+
+During this project, our team has encountered several problems, mainly regarded to the NS3 tool. The lack of the documentation in some parts of the project also with issues when determining cause of the problem in the software made some parts of this project very challenging.   
 
 ### Recommendations for improving network performance
 
