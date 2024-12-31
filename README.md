@@ -173,7 +173,7 @@ In the case of small changes in `totalTxPower`, we see almost no change in the r
 [Output 4](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/lowPower.txt)
 
 
-The NrRadioEnvironmentMapHelper can be used to draw the Coverage area, Beamshape for UL and for DL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Impulse Signal Power Distribution) and SIR (Signal-to-Interference Ratio).
+The NrRadioEnvironmentMapHelper can be used to draw the Coverage area, Beamshape for UL and for DL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR (Signal-to-Noise Ratio), SINR (Signal-to-Interference-plus-Noise Ratio), IPSD (Interference Power Spectral Density) and SIR (Signal-to-Interference Ratio).
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
 
