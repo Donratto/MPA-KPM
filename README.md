@@ -204,5 +204,4 @@ In the case of small changes in `totalTxPower`, we see almost no change in the r
 
 During this project, our team encountered several problems, mainly related to the NS3 tool. The lack of documentation in some parts of the project, along with difficulties in determining the causes of problems in the software, made certain aspects of this project very challenging. We once had a laptop go into sleep mode while we had Virtualbox open. Subsequently, the laptop's integrated and dedicated GPU stopped working.
 
-### Recommendations for improving network performance
 
