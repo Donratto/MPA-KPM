@@ -136,7 +136,7 @@ The output of the simulation is a basic listing of the communication flow and im
 For the purpose of this documentation, you can find a set of different outputs bellow.
 
 
-The first simulation has the following set of parameters:
+The first simulation has the following set of parameters (possition of each device is as it is shown above):
 
 - `udpPacketSizeULL`: 100
 - `udpPacketSizeBe`: 1252
@@ -154,6 +154,25 @@ The first simulation has the following set of parameters:
 
 
 [Output 1](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output1.txt)
+
+
+It has been discovered, that changing the simulation time has a signifficant effect only on the packet loss value. The difference between those two outputs is visible in the following output:
+
+- `simTime`: 1000 ms
+
+[Output 2](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output2.txt)
+
+Changing the `totalTxPower` value while maintaining the same position of all devices has no effect on the output of the simulation.
+
+
+The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is decreased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
+
+
+
+
+
+[Output 3](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output3.txt)
+
 
 
 
