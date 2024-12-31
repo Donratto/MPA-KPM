@@ -181,14 +181,14 @@ In addition to the environment map, the NrRadioEnvironmentMapHelper can also be 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Coverage_area/CA_nr-rem-default-sinr.png)
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Coverage_area/CA_nr-rem-default-ipsd.png)
 
-### Beamshape
+### Beamshape DL
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape/nr-rem-default-snr.png)
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape/nr-rem-default-sir.png)
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape/nr-rem-default-sinr.png)
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape/nr-rem-default-ipsd.png)
 
-### BeamshapeUL
+### Beamshape UL
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape_ul/nr-rem-default-snr.png)
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/Beamshape_ul/nr-rem-default-sir.png)
