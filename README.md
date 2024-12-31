@@ -168,7 +168,7 @@ Changing the `totalTxPower` value while maintaining the same position of all dev
 The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is decreased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
 
 
-
+![updated positions](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/image.png)
 
 
 [Output 3](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output3.txt)
