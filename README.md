@@ -133,106 +133,30 @@ The following table shows the position of devices used in our scenario:
 
 The simulation has been executed several times, always with a different sets of parameters.
 The output of the simulation is a basic listing of the communication flow and important values that accompany the simulation, such as delay, throughput and packet loss, in the console bar.
+For the purpose of this documentation, you can find a set of different outputs bellow.
+
+
+The first simulation has the following set of parameters:
+
+- `udpPacketSizeULL`: 100
+- `udpPacketSizeBe`: 1252
+- `lambdaULL`: 10000
+- `lambdaBe`: 10000
+- `simTime`: 1000 ms
+- `AppStartTime`: 400 ms
+- `numerologyBwp1`: 4
+- `centralFrequencyBand1`: 26.5 GHz
+- `bandwidthBand1`: 100 MHz
+- `numerologyBwp2`: 2
+- `centralFrequencyBand2`: 27 GHz
+- `bandwidthBand2`: 100 MHz
+- `totalTxPower`: 4
+
+
+[Output 1](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/output1.txt)
 
 
 
-
-
-```
-Flow 1 (7.0.0.5:49153 -> 7.0.0.6:1235) proto TCP
-  Tx Packets: 10399
-  Tx Bytes:   5875280
-  TxOffered:  78.337067 Mbps
-  Rx Bytes:   5809856
-  Throughput: 77.464747 Mbps
-  Mean delay:  5.521441 ms
-  Mean jitter:  0.035246 ms
-  Lost Packets: 116
-  Packet loss: 1.115492%
-  Rx Packets: 10283
-Flow 2 (1.0.0.2:49153 -> 7.0.0.2:1234) proto TCP
-  Tx Packets: 11535
-  Tx Bytes:   6515984
-  TxOffered:  86.879787 Mbps
-  Rx Bytes:   6488372
-  Throughput: 86.511627 Mbps
-  Mean delay:  4.811880 ms
-  Mean jitter:  0.037358 ms
-  Lost Packets: 49
-  Packet loss: 0.424794%
-  Rx Packets: 11486
-Flow 3 (1.0.0.2:49154 -> 7.0.0.3:1234) proto TCP
-  Tx Packets: 34715
-  Tx Bytes:   19672960
-  TxOffered:  262.306133 Mbps
-  Rx Bytes:   19564132
-  Throughput: 260.855093 Mbps
-  Mean delay:  3.390973 ms
-  Mean jitter:  0.033265 ms
-  Lost Packets: 193
-  Packet loss: 0.555956%
-  Rx Packets: 34522
-Flow 4 (1.0.0.2:49155 -> 7.0.0.4:1234) proto TCP
-  Tx Packets: 11567
-  Tx Bytes:   6534032
-  TxOffered:  87.120427 Mbps
-  Rx Bytes:   6534032
-  Throughput: 87.120427 Mbps
-  Mean delay:  4.369249 ms
-  Mean jitter:  0.034093 ms
-  Lost Packets: 0
-  Packet loss: 0.000000%
-  Rx Packets: 11567
-Flow 5 (7.0.0.3:1234 -> 1.0.0.2:49154) proto TCP
-  Tx Packets: 17261
-  Tx Bytes:   897576
-  TxOffered:  11.967680 Mbps
-  Rx Bytes:   895964
-  Throughput: 11.946187 Mbps
-  Mean delay:  0.839806 ms
-  Mean jitter:  0.050057 ms
-  Lost Packets: 31
-  Packet loss: 0.179596%
-  Rx Packets: 17230
-Flow 6 (7.0.0.2:1234 -> 1.0.0.2:49153) proto TCP
-  Tx Packets: 5743
-  Tx Bytes:   298640
-  TxOffered:  3.981867 Mbps
-  Rx Bytes:   293284
-  Throughput: 3.910453 Mbps
-  Mean delay:  7.254230 ms
-  Mean jitter:  0.076556 ms
-  Lost Packets: 103
-  Packet loss: 1.793488%
-  Rx Packets: 5640
-Flow 7 (7.0.0.4:1234 -> 1.0.0.2:49155) proto TCP
-  Tx Packets: 5784
-  Tx Bytes:   300772
-  TxOffered:  4.010293 Mbps
-  Rx Bytes:   294116
-  Throughput: 3.921547 Mbps
-  Mean delay:  7.666016 ms
-  Mean jitter:  0.070138 ms
-  Lost Packets: 128
-  Packet loss: 2.213001%
-  Rx Packets: 5656
-Flow 8 (7.0.0.6:1235 -> 7.0.0.5:49153) proto TCP
-  Tx Packets: 5142
-  Tx Bytes:   267388
-  TxOffered:  3.565173 Mbps
-  Rx Bytes:   263748
-  Throughput: 3.516640 Mbps
-  Mean delay:  7.799842 ms
-  Mean jitter:  0.072110 ms
-  Lost Packets: 70
-  Packet loss: 1.361338%
-  Rx Packets: 5072
-
- Mean flow throughput: 66.905840
-  Mean flow delay: 5.206680
-  Mean flow packet loss: 0.955458%
-
-```
 
 
 
