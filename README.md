@@ -198,7 +198,7 @@ In addition to the environment map, the NrRadioEnvironmentMapHelper can also be 
 
 ###  Issues encountered during the simulation 
 
-During this project, our team encountered several problems, mainly related to the NS3 tool. The lack of documentation in some parts of the project, along with difficulties in determining the causes of problems in the software, made certain aspects of this project very challenging. 
+During this project, our team encountered several problems, mainly related to the NS3 tool. The lack of documentation in some parts of the project, along with difficulties in determining the causes of problems in the software, made certain aspects of this project very challenging. We once had a laptop go into sleep mode while we had Virtualbox open. Subsequently, the laptop's integrated and dedicated GPU stopped working.
 
 ### Recommendations for improving network performance
 
