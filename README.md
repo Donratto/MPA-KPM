@@ -164,7 +164,7 @@ In the case of small changes in `totalTxPower`, we see almost no change in the r
 [Output 3](https://github.com/Donratto/MPA-KPM/blob/main/Outputs/lowPower.txt)
 
 
-The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is decreased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
+The most significant differences can be observed in the following output, where we manually set the position of UEs. Their distance from the gNodeBs is increased, therefore dramatic decrease in terms of throughput can be observed. Updated positions can be seen bellow:
 
 
 ![updated positions](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/image.png)
