@@ -179,7 +179,7 @@ The most significant differences can be observed in the following output, where 
 
 
 
-Next, the NrRadioEnvironmentMapHelper creates a map of the radio environment in the xmlAnim.xml file, which can be used to visualize the simulation in NetAnim. In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR, SINR, IPSD and SIR.
+In addition to the environment map, the NrRadioEnvironmentMapHelper can also be used to draw the Coverage area, Beamshape and Beamshape for UL. In Coverage area, Beamshape and Beamshape for UL we have graphically recorded the values of SNR, SINR, IPSD and SIR.
 
 ![Visualisation of the output from GridScenarioHelper](https://github.com/Donratto/MPA-KPM/blob/main/Pictures/GridScenarioHelper.png)
 
